@@ -1,5 +1,7 @@
 import express, {Response, Request} from 'express'
 import cors from 'cors'
+import swaggerUi from 'swagger-ui-express';
+import { doc } from './doc';
 
 const app= express();
 app.use(express.json());
@@ -55,6 +57,9 @@ app.delete('/book/:id', (req : Request, res : Response)=>{
         Msg : "Book deleted"
     })
 })
+
+app.use('/doc', swaggerUi.serve, 
+swaggerUi.setup(doc));
 
 app.listen(3000, ()=>{
     console.log("server is listining")
